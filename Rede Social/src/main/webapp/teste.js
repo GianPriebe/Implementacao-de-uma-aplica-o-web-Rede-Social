@@ -47,9 +47,7 @@ app.post("/editar", function(req, res) {
 		};
 		var meuImg = {
 			Logo: fs.readFileSync('./assets/logo.svg'),
-			AddImg: fs.readFileSync('./assets/img.svg'),
-			Editar: fs.readFileSync('./assets/editar.svg'),
-			Apagar: fs.readFileSync('./assets/apagar.svg')
+			AddImg: fs.readFileSync('./assets/img.svg')
 		}
 		res.render('index', {meuImg: meuImg, meuCss: meuCss, editar: editar_id, nome_usuario: nome_usuario, posts_json: posts_json, nome_perfil_logado: nome_perfil_logado});
 		res.end();
@@ -84,9 +82,7 @@ var meuCss = {
 };
 var meuImg = {
 	Logo: fs.readFileSync('./assets/logo.svg'),
-	AddImg: fs.readFileSync('./assets/img.svg'),
-	Editar: fs.readFileSync('./assets/editar.svg'),
-	Apagar: fs.readFileSync('./assets/apagar.svg')
+	AddImg: fs.readFileSync('./assets/img.svg')
 }
 
 async function getLenghtTabPosts() {
