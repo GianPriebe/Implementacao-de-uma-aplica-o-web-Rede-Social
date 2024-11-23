@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+  <%- meuCss.style %>
+  <title>Rede Social</title>
+  
+</head>
+
+
+<body>
+  <header>
+	<%- meuImg.Logo %>
+  </header>
+  <main class="main">
+    <!-- Formulário de postagem -->
+    <div class="newPost">
+	<div class="infoUser">
+		<div class="imgUser">
+		</div>
+		<strong name="nome"><%- nome_perfil_logado[0].nome %></strong>
+	</div>
+    <form action="/publicar" method="post" class="formPost" id="formPost">
+		<textarea name="textarea" placeholder="Vamos mudar o mundo?" id="textarea"></textarea>
+        <div class="iconsAndButton">
+          <div class="icons">
+            <button class="btnFileForm">
+				<%- meuImg.AddImg %>
+            </button>
+          </div>
+
+          <button onclick="<script>
+			location.reload(true/false);
+			</script>" type="submit" id="botao" class="btnSubmitForm">Publicar</button>
+        </div>
+      </form>
+    </div>
+ 	<h2><% posts_json[0].texto_post %></h2>
+	<% posts_json.forEach(function(post, index) {%>
+			<ul class="posts"> 
+				<li class="post"> 
+					<div class="infoUserPost"> 
+						<div class="imgUserPost"></div> 
+							<div class="nameAndHour"> 
+								<strong><%= posts_json[index].nome %></strong> 
+								<p>21h</p> 
+							</div> 
+						</div> 
+						<p><% if (editar != posts_json[index].id_post) {%>
+								<%= posts_json[index].texto_post; %>
+						</p><%}%>
+						<div class="actionBtnPost">
+							<form action="/editar" method="post" class="formPost" id="formPost">
+								<% if (editar == posts_json[index].id_post) {%>
+										<textarea name="editar" id="editar" style="visibility: visible;" ><%- posts_json[index].texto_post; %></textarea>
+										<button name='editar_bt' id="editar_bt" type="submit" class="filesPost" value="<%- posts_json[index].id_post %>">Confirmar<%- meuImg.Confirmar %></button>
+										<textarea name="editar_h1" id="editar_h1" style="visibility: hidden; position: absolute;" >-1</textarea>
+									<%} else {%>
+										<textarea name="editar" id="editar" style="visibility: hidden; position: absolute;" ><%- posts_json[index].texto_post; %></textarea>
+										<button name='editar_bt' id="editar_bt" type="submit" class="filesPost" value="<%- posts_json[index].id_post %>">editar<%- meuImg.Editar %></button> 
+										<textarea name="editar_h1" id="editar_h1" style="visibility: hidden; position: absolute;" ><%- posts_json[index].id_post %></textarea>
+								<%}%>
+							</form>
+							<form action="/apagar" method="post" class="formPost" id="formPost">
+								<textarea name="apagar_id" id="apagar_id" style="visibility: hidden;" ><%- posts_json[index].id_post %></textarea>
+								<button name='apagar' type="submit" class="filesPost" style="background-color: red;" >apagar<%- meuImg.Apagar %></button> 
+							</form>
+						</div>  
+				</li> 
+			</ul>
+	<%});%>
+  </main>
+</body>
+</html>
