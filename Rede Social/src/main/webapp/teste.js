@@ -65,17 +65,6 @@ app.get("/", (req, res) => {
 	res.render('index', {meuImg: meuImg, meuCss: meuCss, editar: -1, nome_usuario: nome_usuario, posts_json: posts_json, nome_perfil_logado: nome_perfil_logado});
 });
 
-/*
-const http = require('http');
-
-http.createServer(function (req, res) {
-	var htmlCode="<form action='http://localhost:1010/cadastrarUsuario.jsp'>"
-	+ "<input type=submit value=Add ><br></form>";
-	
-	res.writeHead(200, {'Content-Type':'text/html'});
-	res.end(htmlCode);
-}).listen(1010);*/
-
 var fs = require('fs');
 var meuCss = {
 	style : fs.readFileSync('./style.css','utf8')

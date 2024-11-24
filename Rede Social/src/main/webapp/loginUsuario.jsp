@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="css/usuarioStyle.css">
 <meta charset="ISO-8859-1">
-<title>Banana Bacana</title>
+<title>Rede Social</title>
 </head>
 <body>
 	<nav class="usuarioNav">
@@ -17,18 +17,23 @@
 		</ul>
 	</nav>
 	<main class="usuarioMain">
-		<form action="http://localhost:8081" method="post" class="usuarioForm">
+		<form action="loginUsuario" method="post" class="usuarioForm">
 			<div>
 				<label><strong>Email:</strong></label><input type="text"
-					name="Email">
+					name="email">
 				<label><strong>Senha:</strong></label><input type="text"
-					name="Senha">
+					name="senha">
 			</div>
 			<br>
 			<div>
 				<input id="redesocialButton" type="submit" name="salvar"
 					value="Consultar Usuario">
 			</div>
+			<%
+				String mensagem = (String) request.getAttribute("mensagem");
+				if (mensagem != null)
+					out.print(mensagem);
+			%>
 		</form>
 	</main>
 </body>

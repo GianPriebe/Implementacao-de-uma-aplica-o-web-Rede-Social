@@ -1,5 +1,7 @@
 package redesocial.model;
 
+import java.util.ArrayList;
+
 import redesocial.dao.UserDao;
 
 public class Usuario {
@@ -12,6 +14,15 @@ public class Usuario {
 		this.nome = nome;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Usuario(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+
+	public Usuario() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getNome() {
@@ -40,5 +51,9 @@ public class Usuario {
 
 	public void Salvar() {
 		new UserDao().cadastrarUser(this);
+	}
+	
+	public Usuario BuscarUsuario(String email, String senha) {
+		return new UserDao().buscarUsuario(email, senha);
 	}
 }

@@ -1,6 +1,7 @@
 package redesocial.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,29 +43,33 @@ public class loginUsuarioController extends HttpServlet {
 		//doGet(request, response);
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
-		String nome = "";
+
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String mensagem;
 		
 		if (email != null && !email.isEmpty()
 				&& senha != null && !senha.isEmpty()) {
-			
-			System.out.println("email:" + email);
-			System.out.println("senha:" + senha);
-			
-			Usuario usuario = new Usuario(nome, email, senha);
-			usuario.Salvar();
-			mensagem = "Cadastro criado com sucesso!";
+			Usuario usuario = new Usuario().BuscarUsuario(email, senha);
+			if (usuario != null) {
+				System.out.println(usuario.getEmail());
+				System.out.println(usuario.getPassword());
+				response.sendRedirect("http://localhost:8081");
+			} else {
+				mensagem = "Usuario e/ou senha errado(s)";
+				Mensagem(request, response, mensagem);
+			}
 		} else {
 			mensagem = "Todos os campos precisam ser preenchidos!";
+			Mensagem(request, response, mensagem);
 		}
+	}
+	
+	private void Mensagem(HttpServletRequest request, HttpServletResponse response, String mensagem) throws ServletException, IOException {
 		request.setAttribute("mensagem", mensagem);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("loginUsuario.jsp");
 		dispatcher.forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */

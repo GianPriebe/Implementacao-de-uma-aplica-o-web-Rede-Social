@@ -41,26 +41,22 @@ public class UserDao {
 		}
 	}
 
-	public ArrayList<Usuario> BuscarUsuariosPorNome(String nome) {
-		String sql = "SELECT * FROM USUARIOS WHERE nome LIKE '%" + nome + "%'";
+	public Usuario buscarUsuario(String email, String senha) {
+		String sql = "SELECT * FROM usuarios WHERE email = \'"+email+"\' AND _password = \'"+senha+"\';";
 		ResultSet rs = null;
 		Connection conn = null;
 		PreparedStatement pStatement = null;
 		Usuario usuario = null;
-		ArrayList<Usuario> usuarios = null;
 		try {
 			conn = new MySqlConnection().getConnection();
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			if (rs != null) {
-				usuarios = new ArrayList<Usuario>();
 				while (rs.next()) {
-					//usuario = new Usuario();
-					//usuario.setIdUsuario(rs.getInt("idUsuario"));
-					usuario.setNome(rs.getString("Nome"));
-					usuario.setEmail(rs.getString("Email"));
-					usuario.setPassword(rs.getString("Password"));
-					usuarios.add(usuario);
+					//System.out.println("email "+ rs.getString("email"));
+					usuario = new Usuario();
+					usuario.setEmail(rs.getString("email"));
+					usuario.setPassword(rs.getString("_password"));
 				}
 			}
 
@@ -81,6 +77,6 @@ public class UserDao {
 				e2.printStackTrace();
 			}
 		}
-		return usuarios;
+		return usuario;
 	}
 }
