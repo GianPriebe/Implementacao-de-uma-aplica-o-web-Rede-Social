@@ -72,7 +72,7 @@ var meuCss = {
 var meuImg = {
 	Logo: fs.readFileSync('./assets/logo.svg'),
 	AddImg: fs.readFileSync('./assets/img.svg')
-}
+};
 
 async function getLenghtTabPosts() {
 	const db = require("./db");
@@ -91,12 +91,19 @@ async function getLenghtTabPosts() {
 	lenght_posts = lenght_posts.replace('}]', "");
 	lenght_posts = parseInt(lenght_posts);
 	return lenght_posts, posts_json, nome_usuario, nome_perfil_logado;
-}
+};
 
 var port = 8081;
 app.listen(port, function() {
 	console.log(`Servidor rodando na url http://localhost:${port}`);
 });
+
+// Recarrega a página após 5 segundos
+setTimeout(function() {
+    //location.reload();
+	console.log("dsadsa");
+}, 1000);
+setTimeout();
 };
 
 app();

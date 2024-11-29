@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+* {
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #fbfbfb;
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+header {
+	width: 100%;
+	height: 50px;
+	background: #23A0FF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4);
+}
+
+.main {
+	max-width: 317px;
+	margin: 0 auto;
+}
+
+div.newPost {
+	width: 100%;
+	height: 272px;
+	display: flex;
+	flex-direction: column;
+	margin: 171px 0;
+	padding: 25px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 1px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+div.infoUser {
+	display: block;
+	justify-content: center; 
+	align-items: center; 
+	text-align: center;
+
+}
+
+div.newPost form.formPost input.textarea {
+	background: #00ff40;
+}

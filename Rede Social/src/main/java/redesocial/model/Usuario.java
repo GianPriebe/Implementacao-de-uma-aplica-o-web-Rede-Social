@@ -53,6 +53,10 @@ public class Usuario {
 		new UserDao().cadastrarUser(this);
 	}
 	
+	public String CheckExistsUser(String email) {
+		return new UserDao().checkExistsUser(email);
+	}
+	
 	public Usuario BuscarUsuario(String email, String senha) {
 		return new UserDao().buscarUsuario(email, senha);
 	}

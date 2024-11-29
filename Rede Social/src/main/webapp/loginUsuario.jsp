@@ -3,38 +3,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/usuarioStyle.css">
+<link rel="stylesheet" href="styleJavaPage.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+
 <meta charset="ISO-8859-1">
 <title>Rede Social</title>
 </head>
 <body>
-	<nav class="usuarioNav">
-		<ul>
-			<li><span style="color: yellow">RedeSocial</span></li>
-			<li><img src="img/bacana.png" height="20px"></li>
-			<li><a href="cadastrarUsuario.jsp">Cadastrar Usuario</a></li>
-			<li><a href="loginUsuario.jsp">Login</a></li>
-		</ul>
-	</nav>
-	<main class="usuarioMain">
-		<form action="loginUsuario" method="post" class="usuarioForm">
-			<div>
-				<label><strong>Email:</strong></label><input type="text"
-					name="email">
-				<label><strong>Senha:</strong></label><input type="text"
-					name="senha">
-			</div>
-			<br>
-			<div>
-				<input id="redesocialButton" type="submit" name="salvar"
-					value="Consultar Usuario">
-			</div>
-			<%
-				String mensagem = (String) request.getAttribute("mensagem");
-				if (mensagem != null)
-					out.print(mensagem);
-			%>
-		</form>
-	</main>
+  <header>
+  </header>
+ 	 <main class="main">
+   		 <!-- Formulário de postagem -->
+    	 <div class="newPost">
+		 	<div class="infoUser">
+		 		<strong>Login Usuario</strong><br>
+    	 	<form action="loginUsuario" method="post" class="redesocialForm" id="formpost">
+		 		<label><strong>Email:   </strong></label><input type="text" name="email" class="textarea"><br>
+		 		<label><strong>Senha:</strong></label><input type="text" name="senha" class="textarea">
+         		<div class="iconsAndButton">
+         			<input id="redesocialButton" class="btnSubmitForm" type="submit" name="salvar" value="Consultar Usuario">
+         		</div>
+         		<a href="cadastrarUsuario.jsp">Cadastro</a>
+         		<div>
+					<%
+					String mensagem = (String) request.getAttribute("mensagem");
+					if (mensagem != null)
+						out.print(mensagem);
+					%>
+				</div>
+     		</form>
+     		</div>
+    	 </div>
+  	 </main>
 </body>
 </html>

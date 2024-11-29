@@ -46,19 +46,20 @@ public class cadastrarUsuarioController extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
-		String mensagem;
-		
+		String mensagem = null;
+		String usuarioCheck = new Usuario().CheckExistsUser(email);
+		System.out.println(usuarioCheck);
 		if (nome != null && !nome.isEmpty()
 				&& email != null && !email.isEmpty()
 				&& senha != null && !senha.isEmpty()) {
 			
-			System.out.println("nome:" + nome);
-			System.out.println("email:" + email);
-			System.out.println("senha:" + senha);
-			
-			Usuario usuario = new Usuario(nome, email, senha);
-			usuario.Salvar();
-			mensagem = "Cadastro criado com sucesso!";
+			if (usuarioCheck != null) {
+				mensagem = "Email ja cadastrado!";
+			} else {
+				Usuario usuario = new Usuario(nome, email, senha);
+				usuario.Salvar();
+				mensagem = "Usuario cadastrado!";
+			}
 		} else {
 			mensagem = "Todos os campos precisam ser preenchidos!";
 		}

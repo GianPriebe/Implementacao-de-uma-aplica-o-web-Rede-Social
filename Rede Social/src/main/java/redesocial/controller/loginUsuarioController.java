@@ -1,7 +1,14 @@
 package redesocial.controller;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import redesocial.dao.MySqlConnection;
 import redesocial.model.Usuario;
 
 /**
@@ -52,8 +60,14 @@ public class loginUsuarioController extends HttpServlet {
 				&& senha != null && !senha.isEmpty()) {
 			Usuario usuario = new Usuario().BuscarUsuario(email, senha);
 			if (usuario != null) {
-				System.out.println(usuario.getEmail());
-				System.out.println(usuario.getPassword());
+				try {
+					LogadoTrueSQL(email);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Runtime.getRuntime().exec("cmd /c "+ "\"cd C:\\Users\\Giammnn\\git\\repository\\Rede Social\\src\\main\\webapp\\ && executarJs.bat\"");
+				Esperar(response);
 				response.sendRedirect("http://localhost:8081");
 			} else {
 				mensagem = "Usuario e/ou senha errado(s)";
@@ -62,6 +76,59 @@ public class loginUsuarioController extends HttpServlet {
 		} else {
 			mensagem = "Todos os campos precisam ser preenchidos!";
 			Mensagem(request, response, mensagem);
+		}
+	}
+	
+	
+
+	private void Esperar(HttpServletResponse response) throws IOException {
+		System.out.println("Esperando por 5 segundos...");
+	        
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					response.sendRedirect("http://localhost:8081");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("Tempo de espera concluído!");
+				timer.cancel();
+			}
+		}, 1000); // Espera por 5000 milissegundos (5 segundos)
+	}
+
+	
+	private void LogadoTrueSQL(String email) throws SQLException {
+		String sql = "UPDATE usuarios SET logado='0';";
+		String sql2 = "UPDATE usuarios SET logado='1' WHERE email=\'"+email+"\';";
+		Connection conn = null;
+		PreparedStatement pStatement = null;
+		PreparedStatement pStatement2 = null;
+		try {
+			conn = new MySqlConnection().getConnection();
+			pStatement = conn.prepareStatement(sql);
+			pStatement.execute();
+			pStatement2 = conn.prepareStatement(sql2);
+			pStatement2.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pStatement != null)
+					pStatement.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
 		}
 	}
 	
