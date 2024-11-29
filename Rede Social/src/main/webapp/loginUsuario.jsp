@@ -28,9 +28,13 @@
          		<div>
 					<%
 					String mensagem = (String) request.getAttribute("mensagem");
-					if (mensagem != null)
-						out.print(mensagem);
-					%>
+					String col_mensagem = "white";
+					if (mensagem == "Usuario e/ou senha errado(s)") {
+						col_mensagem = "red";
+					} else if (mensagem == "Todos os campos precisam ser preenchidos!") {
+						col_mensagem = "blue";
+					}
+					%> <font color="<%= col_mensagem %>" > <%= mensagem %> </font>
 				</div>
      		</form>
      		</div>
