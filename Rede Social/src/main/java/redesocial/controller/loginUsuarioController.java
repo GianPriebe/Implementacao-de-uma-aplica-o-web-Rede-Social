@@ -60,14 +60,13 @@ public class loginUsuarioController extends HttpServlet {
 				&& senha != null && !senha.isEmpty()) {
 			Usuario usuario = new Usuario().BuscarUsuario(email, senha);
 			if (usuario != null) {
+				Runtime.getRuntime().exec("cmd /c "+ "\"cd C:\\Users\\Giammnn\\git\\repository\\Rede Social\\src\\main\\webapp\\javascript\\ && executarJs.bat\"");
 				try {
 					LogadoTrueSQL(email);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Runtime.getRuntime().exec("cmd /c "+ "\"cd C:\\Users\\Giammnn\\git\\repository\\Rede Social\\src\\main\\webapp\\ && executarJs.bat\"");
-				Esperar(response);
 				response.sendRedirect("http://localhost:8081");
 			} else {
 				mensagem = "Usuario e/ou senha errado(s)";
@@ -78,28 +77,6 @@ public class loginUsuarioController extends HttpServlet {
 			Mensagem(request, response, mensagem);
 		}
 	}
-	
-	
-
-	private void Esperar(HttpServletResponse response) throws IOException {
-		System.out.println("Esperando por 5 segundos...");
-	        
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					response.sendRedirect("http://localhost:8081");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				System.out.println("Tempo de espera concluído!");
-				timer.cancel();
-			}
-		}, 1000); // Espera por 5000 milissegundos (5 segundos)
-	}
-
 	
 	private void LogadoTrueSQL(String email) throws SQLException {
 		String sql = "UPDATE usuarios SET logado='0';";

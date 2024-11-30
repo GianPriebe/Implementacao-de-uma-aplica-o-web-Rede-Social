@@ -98,12 +98,6 @@ app.listen(port, function() {
 	console.log(`Servidor rodando na url http://localhost:${port}`);
 });
 
-// Recarrega a página após 5 segundos
-setTimeout(function() {
-    //location.reload();
-	console.log("dsadsa");
-}, 1000);
-setTimeout();
 };
 
 app();

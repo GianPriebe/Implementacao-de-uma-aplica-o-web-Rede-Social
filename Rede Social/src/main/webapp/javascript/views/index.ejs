@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
   <%- meuCss.style %>
   <title>Rede Social</title>
+  
 </head>
 
 <body>
@@ -29,11 +30,8 @@
 				<%- meuImg.AddImg %>
             </button>
           </div>
-
-          <button onclick="<script>
-			location.reload(true/false);
-			</script>" type="submit" id="botao" class="btnSubmitForm">Publicar</button>
-        </div>
+          <button type="submit" id="botao" class="btnSubmitForm">Publicar</button>
+	  </div>
       </form>
     </div>
  	<h2><% posts_json[0].texto_post %></h2>
@@ -64,7 +62,7 @@
 							</form>
 							<form action="/apagar" method="post" class="formPost" id="formPost">
 								<textarea name="apagar_id" id="apagar_id" style="visibility: hidden;" ><%- posts_json[index].id_post %></textarea>
-								<button name='apagar' type="submit" class="filesPost" style="background-color: red;" >Apagar</button> 
+								<button name='apagar' id="botao" type="submit" class="filesPost" style="background-color: red;" >Apagar</button> 
 							</form>
 						</div>  
 				</li> 

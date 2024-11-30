@@ -1,1 +1,0 @@
-node teste.js
