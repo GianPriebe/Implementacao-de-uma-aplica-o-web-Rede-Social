@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
   <%- meuCss.style %>
   <title>Rede Social</title>
-  
+  <script>function Reload() {location.reload(2000);}</script>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 		<strong name="nome"><%- nome_perfil_logado[0].nome %></strong>
 	</div>
     <form action="/publicar" method="post" class="formPost" id="formPost">
-		<textarea name="textarea" placeholder="Vamos mudar o mundo?" id="textarea"></textarea>
+		<textarea name="textarea" placeholder="O que você está pensando?" id="textarea"></textarea>
         <div class="iconsAndButton">
           <div class="icons">
             <button class="btnFileForm">
@@ -49,8 +49,9 @@
 								<%= posts_json[index].texto_post; %>
 						</p><%}%>
 						<div class="actionBtnPost">
-							<form action="/editar" method="post" class="formPost" id="formPost">
-								<% if (editar == posts_json[index].id_post) {%>
+							<% if (nome_perfil_logado[0].nome == posts_json[index].nome) { %>
+								<form action="/editar" method="post" class="formPost" id="formPost">
+									<% if (editar == posts_json[index].id_post) {%>
 										<textarea name="editar" id="editar" style="visibility: visible;" ><%- posts_json[index].texto_post; %></textarea>
 										<button name='editar_bt' id="editar_bt" type="submit" class="filesPost" value="<%- posts_json[index].id_post %>">Confirmar</button>
 										<textarea name="editar_h1" id="editar_h1" style="visibility: hidden; position: absolute;" >-1</textarea>
@@ -58,14 +59,15 @@
 										<textarea name="editar" id="editar" style="visibility: hidden; position: absolute;" ><%- posts_json[index].texto_post; %></textarea>
 										<button name='editar_bt' id="editar_bt" type="submit" class="filesPost" value="<%- posts_json[index].id_post %>">Editar</button> 
 										<textarea name="editar_h1" id="editar_h1" style="visibility: hidden; position: absolute;" ><%- posts_json[index].id_post %></textarea>
-								<%}%>
-							</form>
-							<form action="/apagar" method="post" class="formPost" id="formPost">
-								<textarea name="apagar_id" id="apagar_id" style="visibility: hidden;" ><%- posts_json[index].id_post %></textarea>
-								<button name='apagar' id="botao" type="submit" class="filesPost" style="background-color: red;" >Apagar</button> 
-							</form>
+									<%}%>
+								</form>
+								<form action="/apagar" onclick="Reload()" method="post" class="formPost" id="formPost">
+									<textarea name="apagar_id" id="apagar_id" style="visibility: hidden;" ><%- posts_json[index].id_post %></textarea>
+									<button name='apagar' id="botao" type="submit" class="filesPost" style="background-color: red;" >Apagar</button> 
+								</form>
+							<%}%>
 						</div>  
-				</li> 
+				</li>
 			</ul>
 	<%});%>
   </main>
